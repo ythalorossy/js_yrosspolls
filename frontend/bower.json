@@ -1,0 +1,17 @@
+{
+    "name": "AngularJS + RequireJS Example",
+    "version": "0.1",
+    "main": "index.html",
+    "ignore": [
+    "**/.*",
+    "libs"
+  ],
+    "dependencies": {
+        "bootstrap"         : "latest",
+        "angular"           : "latest",
+        "angular-resource"  : "latest",
+        "angular-route"     : "latest",
+        "requirejs"         : "latest",
+        "requirejs-domready": "latest"
+    }
+}

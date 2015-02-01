@@ -1,0 +1,5 @@
+define([
+    './route-admin'
+], function(){
+
+});
