@@ -50,15 +50,18 @@ router.post('/polls', function(req, res, next){
 });
 
 router.put('/polls', function(req, res, next){
-    console.log(JSON.stringify(req.body));
+    
+    var poll = req.body;
+    
+    console.log(JSON.stringify(poll));
+    
     for (var i=0, l=polls.length;i<l;i++){
-        if (polls[i]===req.body.id) {
+        
+        if (polls[i].id == poll.id) {
             polls[i]==req.body;
+            poll.isEdit=false;
         }
     }
-    
-    console.log(JSON.stringify(polls));
-    
     res.status(200).json(poll);
 });
 

@@ -1,21 +1,23 @@
-<!-- List all polls --> 
-<div class="panel panel-default">
+<div ng-controller="PollManageController">
+    <!-- List all polls --> 
+    <div class="panel panel-default">
 
-    <div class="panel-heading">
-        <input type="text" class="form-control" id="title" ng-model="poll.title">
-        <label>enabled</label>
-        <input type="checkbox" ng-model="poll.active"/>
-        <input type="hidden" ng-init="poll.totalVotes=0"/>
-    </div>
-    <div class="panel-body">
-        <div class="form-group">
-        <input type="text" class="form-control" placeholder="Fill detail item"
-               ng-repeat="item in poll.items"      
-               ng-model="poll.items[$index].title">
+        <div class="panel-heading">
+            <input type="text" class="form-control" id="title" ng-model="poll.title">
+            <label>enabled</label>
+            <input type="checkbox" ng-model="poll.active"/>
+            <input type="hidden" ng-init="poll.totalVotes=0"/>
         </div>
+        <div class="panel-body">
+            <div class="form-group">
+            <input type="text" class="form-control" placeholder="Fill detail item"
+                   ng-repeat="item in poll.items"      
+                   ng-model="poll.items[$index].title">
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary" type="button" ng-click="addItem(poll)">Add Item</button>
+            <button class="btn btn-primary" type="button" ng-click="save(poll)">Create</button>
+        </div>                    
     </div>
-    <div class="panel-footer">
-        <button class="btn btn-primary" type="button" ng-click="addItem(poll)">Add Item</button>
-        <button class="btn btn-primary" type="button" ng-click="save(poll)">Create</button>
-    </div>                    
 </div>

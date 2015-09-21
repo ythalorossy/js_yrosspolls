@@ -3,7 +3,7 @@ define(['./module'], function(services) {
     services.factory('Poll', function ($resource) {
         
         return $resource('/polls/:action', {
-            isArray: false
+            
         }, {
             actived: {
                 method: 'GET',

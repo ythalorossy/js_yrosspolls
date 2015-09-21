@@ -1,7 +1,6 @@
 define(['./module'], function(routes){
 
     routes.config(function($routeProvider, $locationProvider){
-        console.log("Angular router: /admin");
 
         $routeProvider.when('/', {
             templateUrl : 'partials/index.poll.actived.tpl.html'

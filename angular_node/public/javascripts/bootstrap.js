@@ -13,7 +13,6 @@ define([
         
         ng.module('app').run(['$rootScope', function($rootScope){
             $rootScope.$on('$routeChangeStart', function(event, next){
-                //console.info(event);
                 console.info(next.requirePermission);
             });
         }]);

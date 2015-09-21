@@ -5,7 +5,7 @@ define(['./module'], function(controllers){
         $scope.poll = {};
 
         $scope.refreshAllPolls = function(){
-            console.log("Poll Ctrl getAll");
+            
             Poll.getAll(function(data){
                 $scope.polls = [];
                 angular.forEach(data, function(poll){
@@ -65,12 +65,11 @@ define(['./module'], function(controllers){
         }
 
         $scope.save = function(poll) {
-            console.log("save: " + poll.id );
-            poll = (!poll.id) 
-                ? Poll.save({poll:poll}, function(data){
-                    return data;
+            (!poll.id) 
+                ? Poll.save(poll, function(data){
+                    poll = data;
                 })
-                : Poll.update({poll:poll}, function(data){
+                : Poll.update(poll, function(data){
                     poll = data;
                 });
             
