@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <!-- responsive -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <!-- css vendors -->
+        <link rel="stylesheet" href="stylesheets/bootstrap/3.3.0/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap/3.3.0/bootstrap-theme.min.css">
+    </head>
+    <body ng-controller="PollManageController">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a ng-href="#/create">Create</a></li>
+                    <li><a href="#/list" ng-click="refreshAllPolls()">List All Polls</a></li>
+                </ul>    
+            </div>
+        </nav>    
+        
+        <div >
+            <ng-view></ng-view>
+        </div>
+
+        <app-version version='1.0.1'></app-version>
+
+        <script data-main="javascripts/main" src="bower_components/requirejs/require.js"></script>
+    </body>
+
+</html>

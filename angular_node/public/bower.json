@@ -1,0 +1,32 @@
+{
+  "name": "angularjs_node",
+  "version": "0.0.1",
+  "main": "index.html",
+  "ignore": [
+    "**/.*",
+    "libs",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "latest",
+    "angular": "latest",
+    "angular-resource": "latest",
+    "angular-route": "latest",
+    "requirejs": "latest",
+    "requirejs-domready": "latest"
+  },
+  "homepage": "https://github.com/ythalorossy/js_yrosspolls",
+  "authors": [
+    "Ythalo Rossy Saldanh Lira <ythalorossy@gmail.com>"
+  ],
+  "description": "Exemplo de aplicação utilizando angularjs como view e express como backend",
+  "keywords": [
+    "angularjs",
+    "node",
+    "express"
+  ],
+  "license": "MIT"
+}
