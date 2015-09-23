@@ -1,39 +1,13 @@
 var express = require('express');
 var consign = require('consign');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 
 // Conexão com o banco de dados usando Mongoose
 require('./config/database')('mongodb://127.0.0.1:27017/polls');
 
-//var routes_polls = require('./routes/polls');
+// Configurações do express
+var app = require('./config/express')();
 
-var app = express();
-
-app.use(logger('dev'));
-
-// Gerenciador de templates http://embeddedjs.com
-app.set('view engine', 'ejs');
-
-// Pasta onde ficam os arquivos de templates
-app.set('views', './views');            
-
-// Pasta com recursos estáticos: html, js, css, etc    
-app.use(express.static('./public'));        
-app.use(bodyParser.urlencoded({extended: true}));
-
-// Efetua o parse dos dados da requisição para req.body
-app.use(bodyParser.json());
-
-// Parser "header cookies da req" para req.cookies e armazena o ID da sessão
-app.use(cookieParser());
-
-// Middleware de roteamento
-//app.use('/', routes_polls);
-
+// Gerencia a sequencia de carregamento dos modulos
 consign({
     cwd: process.cwd(),
     locale: 'pt-br',
