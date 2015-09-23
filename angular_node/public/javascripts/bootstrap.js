@@ -9,6 +9,7 @@ define([
 
     'use strict'
     
+    // Chech with all DOM is loaded (ready)
     require(['domReady!'], function(document){
         
         ng.module('app').run(['$rootScope', function($rootScope){

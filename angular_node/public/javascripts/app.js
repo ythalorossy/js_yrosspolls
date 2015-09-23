@@ -1,11 +1,12 @@
+// Prepare all angular modules 
 define([
     'angular',
     'angular-resource',
     'angular-route',
-    './routes/index',
-    './services/index',
-    './controllers/index',
-    './directives/index'
+    './routes/index',       // Router modules
+    './services/index',     // Service modules
+    './controllers/index',  // Controller modules
+    './directives/index'    // Directive modules
 ], function(ng){
     
     'use strict'

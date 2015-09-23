@@ -1,11 +1,15 @@
 var express = require('express');
+var consign = require('consign');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes_polls = require('./routes/polls');
+// Conexão com o banco de dados usando Mongoose
+require('./config/database')('mongodb://127.0.0.1:27017/polls');
+
+//var routes_polls = require('./routes/polls');
 
 var app = express();
 
@@ -28,7 +32,20 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Middleware de roteamento
-app.use('/', routes_polls);
+//app.use('/', routes_polls);
+
+consign({
+    cwd: process.cwd(),
+    locale: 'pt-br',
+    logger: console,
+    verbose: true,
+    extensions: [ '.js', '.json', '.node' ],
+    loggingType: 'info'
+  })
+  .include('models')
+  .then('controllers')
+  .then('routes')
+  .into(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

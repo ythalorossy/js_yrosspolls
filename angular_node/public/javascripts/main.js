@@ -1,3 +1,4 @@
+// Load all dependencies
 require.config({
     // alias libraries paths
     paths : {
