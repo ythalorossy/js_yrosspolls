@@ -22,8 +22,9 @@ var polls = [
 module.exports = function () {
     var controller = {};
     
-    controller.index = function (req, res){
-        res.render("./index");
+    controller.index = function (req, res, next){
+        console.log("index");
+        res.render("index");
     };
     
     controller.actived = function(req, res, next) {
