@@ -1,3 +1,6 @@
+Poll Application
+----------------
+
 This is a model project using the stack M.E.A.N.
 
 MongoDB
