@@ -43,7 +43,7 @@ define(['./module'], function(controllers){
 
         $scope.vote = function() {
             if ($scope.itemCurrentSelected == undefined) return;
-            Item.vote({item:$scope.itemCurrentSelected}, function(data){
+            Item.vote({poll: $scope.poll._id, item: $scope.itemCurrentSelected}, function(data){
                 $scope.poll = data;
                 $scope.isButtonVoteEnabled = false;
                 $scope.isVisibleValues = true;

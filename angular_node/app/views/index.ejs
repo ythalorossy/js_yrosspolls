@@ -6,6 +6,17 @@
         <!-- css vendors -->
         <link rel="stylesheet" href="stylesheets/bootstrap/3.3.0/bootstrap.min.css">
         <link rel="stylesheet" href="stylesheets/bootstrap/3.3.0/bootstrap-theme.min.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            
+            var socket = io.connect("http://localhost:3000");
+            
+            socket.on('userOnline', function(data){
+                document.getElementById('usuarios_online').innerHTML = " " + data.total;
+                console.log(data.total);
+            });
+            
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
@@ -13,14 +24,20 @@
                 <ul class="nav navbar-nav">
                     <li><a ng-href="#/admin/create">Create</a></li>
                     <li><a href="#/admin/list" ng-click="refreshAllPolls()">List All Polls</a></li>
+                    
                 </ul>    
             </div>
         </nav>    
         <div >
             <ng-view></ng-view>
         </div>
-
+        <div>
+        Usuários Online: <span id="usuarios_online"></span>
+        </div>
+        
+        
         <script data-main="javascripts/main" src="bower_components/requirejs/require.js"></script>
+
         
     </body>
 </html>

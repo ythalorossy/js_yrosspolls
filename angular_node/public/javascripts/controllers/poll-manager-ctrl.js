@@ -2,7 +2,7 @@ define(['./module'], function(controllers){
     'use strict';
     controllers.controller('PollManageController', function($scope, Poll, Item){
         $scope.polls = [];
-        $scope.poll = {};
+        $scope.poll = {active: false};
 
         $scope.refreshAllPolls = function(){
             

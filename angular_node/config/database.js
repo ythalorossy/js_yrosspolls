@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = function (uri) {
     mongoose.connect(uri);
+    mongoose.set('debug', true);
     
     mongoose.connection.on('connected', function () {
         console.log('Mongoose! Conectado em ' + uri);
@@ -24,4 +25,4 @@ module.exports = function (uri) {
         });
         
     });
-}
+};

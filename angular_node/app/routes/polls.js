@@ -7,9 +7,9 @@ module.exports = function (app) {
 
     app.get('/polls', app.controllers.polls.all);
 
-    app.post('/polls', app.controllers.polls.create);
+    app.post('/polls', app.controllers.polls.saveOrUpdate);
 
-    app.put('/polls', app.controllers.polls.update);
+    app.put('/polls', app.controllers.polls.saveOrUpdate);
 
-    app.post('/item/vote', app.controllers.polls.vote);
+    app.post('/items/vote', app.controllers.polls.vote);
 };

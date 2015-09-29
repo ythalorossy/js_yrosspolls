@@ -1,69 +1,118 @@
-// Mantendo cache de polls em memória 
-var polls = [
-        {
-            id:1000,
-            title: 'Conseguiremos?', 
-            active: true, 
-            totalVotes: 1520, 
-            items:[
-               {id:105, title:'Yes', amount:9000}, 
-                {id:106, title:'No', amount:1000}]
-        },
-        {
-            id:1001,
-            title: 'Angularjs + nodejs?', 
-            active: false, 
-            totalVotes: 10000, 
-            items:[
-               {id:103, title:'Yes', amount:9000}, 
-                {id:104, title:'No', amount:1000}]}        
-    ];
-
-module.exports = function () {
-    var controller = {};
+module.exports = function (app) {
+    'use strict';
+    var Poll = app.models.poll,
+        Item = app.models.item,
+        controller = {};
     
-    controller.index = function (req, res, next){
-        console.log("index");
+    controller.index = function (req, res, next) {
         res.render("index");
     };
     
     controller.actived = function(req, res, next) {
-        res.status(200).json({
-            id:100, 
-            title:'Conseguiremos?', 
-            active:true, 
-            totalVotes:1520, 
-            items:[
-               {id:101, title:'Yes', amount:90}, 
-                {id:102, title:'No', amount:10}]});
+        
+        Poll
+            .findOne({'active': true})
+            .exec()
+            .then(function(poll){
+                res.status(200).json(poll);
+            });
     };
     
-    controller.all = function(req, res, next) {
-        res.status(200).json(polls);
+    controller.all = function (req, res) {
+        Poll.find().exec().then(
+            function (polls) {
+                res.status(200).json(polls);
+            },
+            function (erro) {
+                console.error(erro);
+                res.status(500).json(erro);
+            }
+        );
     };
     
-    controller.create = function(req, res, next){
-        var poll = req.body;
-        poll.id = Math.floor((Math.random() * 1000) + 1)
-        polls.push(poll);
-        res.status(200).json(poll);
+    controller.findById = function (req, res) {
+        var _id = req.params.id;
+        Poll.findById(_id).exec().then(
+            function (poll) {
+                if (!poll) throw new Error("Poll not found");
+                res.json(poll);
+            },
+            function (erro) {
+                console.log(erro);
+                res.status(404).json(erro);
+            }
+        );
     };
     
-    controller.update = function(req, res, next){
-        var poll = req.body;
-
-        for (var i=0, l=polls.length;i<l;i++){
-
-            if (polls[i].id == poll.id) {
-                polls[i]==req.body;
-                poll.isEdit=false;
+    controller.delete = function(req, res) {
+        var _id = req.params.id;
+        Poll.remove({"_id": _id}).exec().then(
+            function () {
+                res.end();
+            },
+            function (erro) {
+                return console.error(erro);
+            }
+        );
+    };
+    
+    controller.saveOrUpdate = function(req, res, next){
+        
+        var _id = req.body._id;
+        
+        console.log(req.body);
+        
+        if (_id) {
+        
+            Poll.findByIdAndUpdate(_id, req.body).exec()
+                .then(function(poll){
+                    res.status(200).json(poll);
+                },
+                function(erro){
+                    console.log(erro);
+                    res.status(500).json(erro);
+                }
+            );
+        
+        } else {
+            try {
+                var poll = new Poll({
+                    title: req.body.title,
+                    active: req.body.active,
+                    totalVotes : req.body.totalVotes,
+                    items: req.body.items
+                });
+                
+                poll.save(function(err, poll){
+                    if (err) console.error(err);
+                });
+            } catch (err) {
+                console.error(err);
             }
         }
-        res.status(200).json(poll);
-    }
+    };
     
-    controller.vote = function(req, res, next){
-        res.status(200).json(polls[0]);
+    controller.vote = function(req, res){
+
+        var _id = req.body.poll;
+        
+        Poll.findById(_id).then(function(poll){
+            
+            for (var i=0, l=poll.items.length; i < l; i++) {
+            
+                if (poll.items[i].title === req.body.item.title) {
+                    poll.totalVotes += 1;
+                    poll.items[i].amount += 1;
+                    break;
+                }
+            }
+        
+            Poll.findByIdAndUpdate(poll._id, poll, function(err, poll){
+                if (err) console.error(err);
+            });
+            
+            res.status(200).json(poll);
+        });
     };
     
     return controller;

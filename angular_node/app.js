@@ -1,4 +1,3 @@
-var express = require('express');
 var consign = require('consign');
 
 // Conexão com o banco de dados usando Mongoose
