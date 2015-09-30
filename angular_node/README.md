@@ -21,3 +21,8 @@ npm install
 ### Run
 
 node ./bin/www
+
+  [MongoDB]: <http://www.mongodb.com/>
+  [node.js]: <http://nodejs.org>
+  [express]: <http://expressjs.com>
+  [AngularJS]: <http://angularjs.org>
