@@ -1,6 +1,13 @@
 module.exports = function (app) {
     
-
+    app.get('/', function(req, res, next){
+        if (req.isAuthenticated()) {
+            return next();
+        } else {
+            res.redirect('/auth');
+        }
+    });
+    
     app.get('/', app.controllers.polls.index);
 
     app.get('/polls/actived', app.controllers.polls.actived);

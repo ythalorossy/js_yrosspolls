@@ -9,7 +9,7 @@
             <ul class="list-group">
                 <a ng-href="#/" ng-repeat="item in poll.items" class="list-group-item" ng-click="selectItem(poll, item)">
                     {{item.title}}
-                    <span class="badge" ng-show="isVisibleValues">{{item.amount / poll.totalVotes * 100 | number:2}}%</span>
+                    <span class="badge" ng-show="isVisibleValues">{{item.amount}} votes - {{item.amount / poll.totalVotes * 100 | number:2}}%</span>
                 </a>
             </ul>
         </div>

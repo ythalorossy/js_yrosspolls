@@ -4,7 +4,8 @@
  * properly referenced in one of the module dependencies in the array.
  **/
 define([
-    './app-version'],
+    './app-version',
+    './admin-menu'],
     function () {
         console.info('Directives index loaded.');
 

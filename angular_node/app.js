@@ -6,6 +6,8 @@ require('./config/database')('mongodb://127.0.0.1:27017/polls');
 // Configurações do express
 var app = require('./config/express')();
 
+var oauth = require('./config/oauth')(app);
+
 // Gerencia a sequencia de carregamento dos modulos
 consign({
     cwd: 'app',
@@ -33,6 +35,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
+        console.log(err);
+        
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,

@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var session = require('express-session');
 
 module.exports = function () {
 
@@ -25,6 +26,12 @@ module.exports = function () {
 
     // Parser "header cookies da req" para req.cookies e armazena o ID da sessão
     app.use(cookieParser());
+    
+    app.use(session({ 
+        secret: 'yrosspoll' 
+        , resave: true
+        , saveUninitialized: true
+    }));
 
     return app;
 };
