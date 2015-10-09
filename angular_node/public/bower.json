@@ -12,6 +12,8 @@
   ],
   "dependencies": {
     "bootstrap": "latest",
+    "bootstrap-social": "latest",  
+    "components-font-awesome": "latest",  
     "angular": "latest",
     "angular-resource": "latest",
     "angular-route": "latest",
@@ -20,7 +22,7 @@
   },
   "homepage": "https://github.com/ythalorossy/js_yrosspolls",
   "authors": [
-    "Ythalo Rossy Saldanh Lira <ythalorossy@gmail.com>"
+    "Ythalo Rossy Saldanha Lira <ythalorossy@gmail.com>"
   ],
   "description": "Exemplo de aplicação utilizando angularjs como view e express como backend",
   "keywords": [

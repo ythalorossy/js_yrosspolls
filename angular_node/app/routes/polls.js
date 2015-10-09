@@ -1,22 +1,30 @@
 module.exports = function (app) {
     
-    app.get('/', function(req, res, next){
-        if (req.isAuthenticated()) {
-            return next();
-        } else {
-            res.redirect('/auth');
-        }
-    });
-    
-    app.get('/', app.controllers.polls.index);
+    var router = require('express').Router();
 
-    app.get('/polls/actived', app.controllers.polls.actived);
+    router.route('/')
+        .get(
+            // Check if user are logged
+            function(req, res, next){
+                if (req.isAuthenticated()) {
+                    return next();
+                } else {
+                    res.redirect('/auth');
+                }
+            },
+            app.controllers.polls.index
+        );
 
-    app.get('/polls', app.controllers.polls.all);
+    router.route('/polls/actived')
+        .get(app.controllers.polls.actived);
 
-    app.post('/polls', app.controllers.polls.saveOrUpdate);
+    router.route('/polls')
+        .get(app.controllers.polls.all)
+        .post(app.controllers.polls.saveOrUpdate)
+        .put(app.controllers.polls.saveOrUpdate);
 
-    app.put('/polls', app.controllers.polls.saveOrUpdate);
+    router.route('/items/vote')
+        .post(app.controllers.polls.vote);
 
-    app.post('/items/vote', app.controllers.polls.vote);
+    app.use(router);
 };

@@ -1,14 +1,15 @@
 var consign = require('consign');
 
-// Conexão com o banco de dados usando Mongoose
+// Connection with database using Mongoose
 require('./config/database')('mongodb://127.0.0.1:27017/polls');
 
-// Configurações do express
+// Express Configurations
 var app = require('./config/express')();
 
+// OAuth Configurations
 var oauth = require('./config/oauth')(app);
 
-// Gerencia a sequencia de carregamento dos modulos
+// The sequence in which the modules will be loaded
 consign({
     cwd: 'app',
     locale: 'pt-br',

@@ -4,16 +4,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <!-- css vendors -->
-        <link rel="stylesheet" href="stylesheets/bootstrap/3.3.0/bootstrap.min.css">
-        <link rel="stylesheet" href="stylesheets/bootstrap/3.3.0/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
         <script src="/socket.io/socket.io.js"></script>
         <script>
             
             var socket = io.connect("http://localhost:3000");
             
             socket.on('userOnline', function(data){
-                document.getElementById('usuarios_online').innerHTML = " " + data.total;
-                console.log(data.total);
+                document.getElementById('usuariosOnline').innerHTML = " " + data.total;
+            });
+            
+            socket.on('adminConsole', function(data){
+                document.getElementById('adminConsole').innerHTML = " " + data.console;
             });
             
         </script>
@@ -23,9 +28,13 @@
             <ng-view></ng-view>
         </div>
         <div>
-        Usuários Online: <span id="usuarios_online"></span>
+        Usuários Online: <span id="usuariosOnline"></span>
         </div>
+        <div id="adminConsole"/>
         
+        <div>
+            <span><a href="/logout">logout</a></span>
+        </div>
         
         <script data-main="javascripts/main" src="bower_components/requirejs/require.js"></script>
 
