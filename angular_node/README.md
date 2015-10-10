@@ -4,9 +4,9 @@ This is a model project using the stack M.E.A.N.
 
 ## Requirements
 
-* [AngularJS] - HTML enhanced for web apps!
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework
+* [AngularJS] - HTML enhanced for web apps.
+* [node.js] - evented I/O for the backend.
+* [Express] - fast node.js network app framework.
 * [MongoDB] - is a cross-platform document-oriented database.
 
 ### Configuration
