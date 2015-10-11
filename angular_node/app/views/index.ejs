@@ -11,7 +11,7 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             
-            var socket = io.connect("http://localhost:3000");
+            var socket = io.connect("https://js-yrosspolls-ythalorossy.c9.io");
             
             socket.on('userOnline', function(data){
                 document.getElementById('usuariosOnline').innerHTML = " " + data.total;

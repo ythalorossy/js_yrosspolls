@@ -1,13 +1,17 @@
 var consign = require('consign');
 
 // Connection with database using Mongoose
-require('./config/database')('mongodb://127.0.0.1:27017/polls');
+require('./config/database')('mongodb://ythalorossy-js_yrosspolls-1996271:27017/polls');
 
 // Express Configurations
 var app = require('./config/express')();
+var server = require('http').Server(app);
+
+// Socket.io default configuration
+var io = require('./config/socket.io')(server);
 
 // OAuth Configurations
-var oauth = require('./config/oauth')(app);
+var oauth = require('./config/oauth')("https://js-yrosspolls-ythalorossy.c9.io");
 
 // The sequence in which the modules will be loaded
 consign({
@@ -56,4 +60,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-module.exports = app;
+server.listen(process.env.PORT || 3000);

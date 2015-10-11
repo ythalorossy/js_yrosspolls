@@ -1,28 +1,25 @@
 
-module.exports = function (app) {
+module.exports = function (url_base) {
 
     var passport = require('passport')
       , FacebookStrategy = require('passport-facebook').Strategy
       , TwitterStrategy  = require('passport-twitter').Strategy
       , GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
-    app.use(passport.initialize());
-    app.use(passport.session());
-    
     /********************
     * Facebook Strategy *
     ********************/
     passport.use(new FacebookStrategy({
         clientID: '1077025878988589',
         clientSecret: '126390ef1adc5444b33e9e08515cc1e5',
-        callbackURL: "http://yrosspoll.com.br:3000/auth/facebook/callback"
+        callbackURL: url_base + "/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, done) {
             
             done(null, {
                 "_id": 99696999,
                 "login": profile.username, 
-                "nome": "Ythalo Rossy S. Lira"});
+                "nome": profile.username});
         }
     ));
 
@@ -39,7 +36,7 @@ module.exports = function (app) {
         done(null, {
             "_id": 99696999,
             "login": profile.username, 
-            "nome": "Ythalo Rossy S. Lira"});
+            "nome": profile.username});
         }
     ));
 
@@ -49,13 +46,13 @@ module.exports = function (app) {
     passport.use(new GoogleStrategy({
         clientID: "768512486628-in564djd0ada8p0e0g2uvfjeemu03fdg.apps.googleusercontent.com",
         clientSecret: "vsIfdhxONaMDw9920ohtmLA9",
-        callbackURL: "http://yrosspoll.com.br:3000/auth/google/callback"
+        callbackURL: url_base + "/auth/google/callback"
       },
       function(accessToken, refreshToken, profile, done) {
         done(null, {
             "_id": 99696999,
             "login": profile.username, 
-            "nome": "Ythalo Rossy S. Lira"});
+            "nome": profile.username});
         }
     ));
     

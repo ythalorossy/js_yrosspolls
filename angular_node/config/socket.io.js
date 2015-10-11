@@ -1,6 +1,6 @@
 module.exports = function (server) {
 
-    var io = require('socket.io')(server); 
+    var io = require('socket.io')(server);
     
     var total = 0;
     
@@ -17,4 +17,6 @@ module.exports = function (server) {
             client.broadcast.emit('userOnline', {total : total});
         });    
     });
+    
+    return io;
 };
