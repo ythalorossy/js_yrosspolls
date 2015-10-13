@@ -8,10 +8,10 @@ var app = require('./config/express')();
 var server = require('http').Server(app);
 
 // Socket.io default configuration
-var io = require('./config/socket.io')(server);
+require('./config/socket.io')(server);
 
 // OAuth Configurations
-var oauth = require('./config/oauth')("https://js-yrosspolls-ythalorossy.c9.io");
+require('./config/oauth')("https://js-yrosspolls-ythalorossy.c9.io");
 
 // The sequence in which the modules will be loaded
 consign({
