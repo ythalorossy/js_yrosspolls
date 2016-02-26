@@ -1,7 +1,8 @@
 var consign = require('consign');
 
 // Connection with database using Mongoose
-require('./config/database')('mongodb://ythalorossy-js_yrosspolls-1996271:27017/polls');
+//require('./config/database')('mongodb://ythalorossy-js_yrosspolls-1996271:27017/polls');
+require('./config/database')('mongodb://augusto:ayabrea123@ds015508.mongolab.com:15508/polls');
 
 // Express Configurations
 var app = require('./config/express')();
