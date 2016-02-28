@@ -1,34 +1,41 @@
-define(['./module'], function(controllers){
+define(['angular', './module'], function(angular, controllers){
+    
     'use strict';
+    
     controllers.controller('PollManageController', function($scope, Poll, Item){
+    
         $scope.polls = [];
         $scope.poll = {active: false};
 
         $scope.refreshAllPolls = function(){
             
             Poll.getAll(function(data){
-                $scope.polls = [];
-                angular.forEach(data, function(poll){
+                $scope.polls = data.map(function(poll){
                     poll.isEdit = false;
-                    $scope.polls.push(poll);
+                    poll.isNew = false;
+                    return poll;
                 });
             });
-        }
+        };
 
         $scope.refreshAllPolls();
 
+        // Add Item to Poll
         $scope.addItem = function(poll) {
-            if (angular.isUndefined(poll.items)) poll.items = [];
-
+            
+            poll.items = poll.items || [];
+            
             poll.items.push({
                 id : 0,
                 idpoll: poll.id, 
                 title: "",
                 amount: 0, 
-                isNew : true
+                isNew : true,
+                isEdit: false
             });
-        }
-
+        };
+        
+        // Delete Item from Poll
         $scope.deleteItem = function(poll, item) {
             if (item.id != 0) {
                 Item.delete({item: item}, function(data){
@@ -36,35 +43,37 @@ define(['./module'], function(controllers){
                 });
             } 
             poll.items.splice(poll.items.indexOf(item), 1);
-        }
+        };
 
+        // Prepare Poll to edition
         $scope.prepareEdit = function(poll) {
             poll.isEdit = true;
-        }
-
-        // To remove all items marked as new 
-        var discardNewItems = function(poll){
-            return poll.items.filter(function(item){
-                return typeof(item.isNew)==="undefined";
-            })
-        }
+        };
 
         // Cancel the edition of Poll
         $scope.cancel = function(poll) {
-            poll.items = discardNewItems(poll);
-            poll.isEdit = false;
-        }
-
-        function validateItems (items) {
-            return items.filter(function(item){
-                var isNew    = typeof(item.isNew)!=="undefined",
-                    isDelete = typeof(item.isDelete)!=="undefined";
-
-                return (!isNew && !isDelete) || (isNew && !isDelete && (item.title !== ""));
+            
+            poll.items = poll.items.filter(function(item) {
+                return !item.hasOwnProperty('isNew') || !item.isNew;
             });
-        }
-
+            
+            poll.isEdit = false;
+        };
+    
+        // Save Poll
         $scope.save = function(poll) {
+            
+            (function (poll) {
+                delete poll.isNew; 
+                delete poll.isEdit;
+                 
+                poll.items = poll.items.map(function (item) {
+                    delete item.isNew;
+                    delete item.isEdit;
+                    return item;
+                });
+            })(poll);
+            
             (!poll.id) 
                 ? Poll.save(poll, function(data){
                     poll = data;
@@ -74,7 +83,7 @@ define(['./module'], function(controllers){
                 });
             
             poll.isEdit = false;
-        }
+        };
     });
 
 });

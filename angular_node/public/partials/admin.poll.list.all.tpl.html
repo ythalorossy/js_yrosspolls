@@ -1,31 +1,29 @@
 <div ng-controller="PollManageController">
 
-<admin-menu></admin-menu>
-    
-    
-<!-- Search poll -->
-<div class="form-group">
-<input type="text" class="form-control" placeholder="Search poll by title"
-       ng-model="search.title">
-</div>
-
-<!-- List all polls -->
-<div class="panel panel-default" ng-repeat="poll in polls | filter:search:strict">
-
-    <!-- Poll Details -->
-    <div class="panel-heading">
-        <h3 class="panel-title" ng-if="!poll.isEdit">{{poll.title}}</h3>
-        <input type="text" class="form-control" id="title" ng-model="poll.title" ng-show="poll.isEdit">
-    </div>
-    <div class="panel-body">
+    <admin-menu></admin-menu>
         
+    <!-- Search poll -->
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search poll by title" ng-model="search.title">
+    </div>
+    
+    <!-- List all polls -->
+    <div class="panel panel-default" ng-repeat="poll in polls | filter:search:strict">
+    
+        <!-- Poll Details -->
+        <div class="panel-heading">
+            <h3 class="panel-title" ng-if="!poll.isEdit">{{poll.title}}</h3>
+            <div class="form-group" ng-show="poll.isEdit">
+                <input type="text" class="form-control" id="title" ng-model="poll.title">
+            </div>
+        </div>
         <!-- Poll's items-->
         <ul class="list-group">
             <li class="list-group-item" 
                 ng-if="!poll.isEdit && !item.isDelete" 
                 ng-repeat="item in poll.items">
                 {{item.title}}
-                <span class="badge">{{item.amount / poll.totalVotes * 100 | number:2}}%</span>
+                <span class="badge">{{item.amount / poll.totalVotes * 100 | number:2 }}%</span>
             </li>
         
             <li class="list-group-item" 
@@ -33,7 +31,7 @@
                 ng-model="poll.items[$index].title" 
                 ng-if="poll.isEdit" >
 
-                <div ng-show="!item.isDelete" class="row">
+                <div ng-show="!item.isDelete">
                     <div class="input-group">
                         <input type="text" id="title" value="{{item.title}}" class="form-control" ng-model="poll.items[$index].title"/>
                         <span class="input-group-btn">
@@ -43,17 +41,22 @@
                 </div>
             </li>
             <li class="list-group-item">
-                <span ng-class="{'label label-success': poll.active == 1, 'label label-default': poll.active == 0}">{{poll.active==1?'Enable':'Disabled'}}</span>
-                <span>Total votes: {{poll.totalVotes}}</span>
+                <div class="row">
+                    <span ng-class="{'label label-success': poll.active}" class="col-xs-12 col-md-2 label label-default">
+                        {{ poll.active ? 'Enable' : 'Disabled'}}
+                    </span>
+                    <span class="col-xs-6 col-md-3">Total votes:</span>
+                    <span class="col-xs-6 col-md-2">{{poll.totalVotes}}</span>
+                </div>
             </li>
         </ul>
+        
+        <div class="panel-footer">
+            <button class="btn btn-primary" type="button" ng-click="prepareEdit(poll)" ng-if="!poll.isEdit">Edit</button>
+            <button class="btn btn-primary" type="button" ng-click="cancel(poll)" ng-if="poll.isEdit">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-click="addItem(poll)" ng-if="poll.isEdit">Add Item</button>
+            <button class="btn btn-primary" type="button" ng-click="save(poll)" ng-if="poll.isEdit">Save</button>
+        </div>    
     </div>
-    <div class="panel-footer">
-        <button class="btn btn-primary" type="button" ng-click="prepareEdit(poll)" ng-show="!poll.isEdit">Edit</button>
-        <button class="btn btn-primary" type="button" ng-click="cancel(poll)" ng-show="poll.isEdit">Cancel</button>
-        <button class="btn btn-primary" type="button" ng-click="addItem(poll)" ng-show="poll.isEdit">Add Item</button>
-        <button class="btn btn-primary" type="button" ng-click="save(poll)" ng-show="poll.isEdit">Save</button>
-    </div>    
-</div>
     
 </div>    

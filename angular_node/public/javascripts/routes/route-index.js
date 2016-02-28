@@ -6,10 +6,7 @@ define(['./module'], function(routes){
             templateUrl : 'partials/index.poll.actived.tpl.html'
         });
         
-        $routeProvider.when('/admin', {
-            templateUrl : 'partials/admin.poll.list.all.tpl.html',
-            requirePermission : ['admin', 'supervisor']
-        });
+        $routeProvider.when('/admin', {redirectTo: '/admin/list'});
 
         $routeProvider.when('/admin/list', {
             templateUrl : 'partials/admin.poll.list.all.tpl.html',
