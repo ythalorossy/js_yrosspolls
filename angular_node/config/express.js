@@ -15,7 +15,7 @@ module.exports = function () {
     app.set('view engine', 'ejs');
 
     // Pasta onde ficam os arquivos de templates
-    app.set('views', './app/views');            
+    app.set('views', './server/views');            
 
     // Pasta com recursos estáticos: html, js, css, etc    
     app.use(express.static('./public'));        

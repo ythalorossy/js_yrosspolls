@@ -16,7 +16,7 @@ require('./config/oauth')("https://js-yrosspolls-ythalorossy.c9.io");
 
 // The sequence in which the modules will be loaded
 consign({
-    cwd: 'app',
+    cwd: 'server',
     locale: 'pt-br',
     logger: console,
     verbose: true,
