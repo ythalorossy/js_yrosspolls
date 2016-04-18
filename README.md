@@ -6,7 +6,7 @@ This is a prototype project which use various technologies to practice the acqui
 [Angular and Node] - Frontend developed using Angular.js and bootstrap. Backend using Node.js, Express.js and MongoDB. 
 [PHPv] - Frontend developed using Angular.js and bootstrap. Backend using PHP and MySQL. 
 
-## Technologies
+## Technologies 
 * [PHP] - PHP is a popular general-purpose scripting language that is especially suited to web development.
 * [AngularJS] - HTML enhanced for web apps.
 * [node.js] - evented I/O for the backend.
